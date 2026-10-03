@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LARA GAME STUDIO — Independent game developer creating mobile games and interactive experiences." />
+  <meta name="theme-color" content="#0b0d12" />
+  <title>LARA GAME STUDIO</title>
+  <style>
+    :root{--bg:#080a0f;--card:#11151d;--card2:#151a24;--text:#f5f7fb;--muted:#a7afbf;--line:#252c38;--accent:#7c5cff;--accent2:#a98fff;--max:1120px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 80% 0%,rgba(124,92,255,.16),transparent 30%),var(--bg);color:var(--text);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(92%,var(--max));margin:auto}
+    header{position:sticky;top:0;z-index:20;background:rgba(8,10,15,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+    nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{font-weight:900;letter-spacing:.08em;font-size:15px}
+    .brand span{color:var(--accent2)}
+    .navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px}
+    .navlinks a:hover{color:#fff}
+    .hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:80px 0 60px;position:relative;overflow:hidden}
+    .hero:before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:rgba(124,92,255,.18);filter:blur(90px);top:30px;left:50%;transform:translateX(-50%)}
+    .hero>*{position:relative}
+    .badge{display:inline-block;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--muted);padding:7px 13px;border-radius:999px;font-size:13px;margin-bottom:22px}
+    h1{font-size:clamp(42px,9vw,86px);line-height:.98;letter-spacing:-.05em;margin-bottom:24px}
+    h1 span{background:linear-gradient(100deg,#fff,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{max-width:650px;margin:auto;color:var(--muted);font-size:18px}
+    .btn{display:inline-block;margin-top:30px;background:var(--accent);padding:13px 21px;border-radius:12px;font-weight:800;box-shadow:0 12px 30px rgba(124,92,255,.22)}
+    section{padding:78px 0}
+    .section-title{text-align:center;margin-bottom:38px}
+    .section-title h2{font-size:32px;margin-bottom:8px}
+    .section-title p{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;padding:28px;min-height:190px}
+    .icon{font-size:28px;margin-bottom:15px}.card h3{margin-bottom:8px}.card p{color:var(--muted);font-size:15px}
+    .games{display:grid;place-items:center;text-align:center;border:1px dashed #3a4251;border-radius:24px;padding:58px 20px;background:rgba(255,255,255,.02)}
+    .games .big{font-size:48px;margin-bottom:12px}.games h3{font-size:24px}.games p{color:var(--muted);margin-top:7px}
+    .ad-wrap{margin-top:30px}.ad{display:block;border:1px solid var(--line);background:linear-gradient(135deg,#121722,#0d1017);border-radius:18px;padding:26px;text-align:center;transition:.2s}.ad:hover{border-color:#5f4bc0;transform:translateY(-2px)}
+    .ad small{display:block;color:#70798a;letter-spacing:.14em;font-size:10px;margin-bottom:8px}.ad strong{font-size:18px}.ad em{display:block;color:var(--muted);font-style:normal;font-size:13px;margin-top:5px}
+    .contact{max-width:700px;margin:auto;text-align:center;border:1px solid var(--line);border-radius:24px;padding:42px;background:rgba(255,255,255,.025)}
+    footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:13px}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}.footer-links{display:flex;gap:18px}.footer-links a:hover{color:#fff}
+    @media(max-width:760px){.navlinks{display:none}.grid{grid-template-columns:1fr}.hero{min-height:72vh;padding-top:60px}.hero p{font-size:16px}section{padding:60px 0}.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <a class="brand" href="#home">LARA <span>GAME STUDIO</span></a>
+      <div class="navlinks">
+        <a href="#about">About</a><a href="#games">Games</a><a href="#advertisement">Advertisement</a><a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero" id="home"><div class="container"><div class="badge">INDEPENDENT GAME DEVELOPER</div><h1>LARA<br><span>GAME STUDIO</span></h1><p>Creating mobile games and interactive experiences with a focus on simple ideas, enjoyable gameplay, and continuous improvement.</p><a class="btn" href="#games">Explore Studio</a></div></section>
+  <section id="about"><div class="container"><div class="section-title"><h2>About the Studio</h2><p>Small studio. Big ideas. One project at a time.</p></div><div class="grid"><article class="card"><div class="icon">🎮</div><h3>Game Development</h3><p>Developing mobile games from concept and prototype through future releases.</p></article><article class="card"><div class="icon">💡</div><h3>Creative Ideas</h3><p>Exploring accessible game concepts designed to be easy to understand and fun to play.</p></article><article class="card"><div class="icon">🚀</div><h3>Growing Studio</h3><p>LARA GAME STUDIO is building its portfolio step by step, with more projects planned for the future.</p></article></div></div></section>
+  <section id="games"><div class="container"><div class="section-title"><h2>Our Games</h2><p>Games and releases will appear here when they are ready.</p></div><div class="games"><div class="big">🎮</div><h3>Coming Soon</h3><p>No games have been released yet.</p></div></div></section>
+  <section id="updates"><div class="container"><div class="section-title"><h2>News & Updates</h2><p>Development news will be published here in the future.</p></div><div class="games"><div class="big">📰</div><h3>Updates Coming Soon</h3><p>There are no public updates yet.</p></div></div></section>
+  <section id="advertisement"><div class="container"><div class="section-title"><h2>Advertisement</h2><p>Banner area for future advertising, affiliate links, or sponsors.</p></div><div class="ad-wrap"><a class="ad" href="#advertisement" aria-label="Advertisement"><small>ADVERTISEMENT</small><strong>Banner Link</strong><em>Tempat banner iklan akan dipasang di sini</em></a></div></div></section>
+  <section id="contact"><div class="container"><div class="contact"><div class="icon">✉️</div><h2>Contact LARA GAME STUDIO</h2><p style="color:var(--muted);margin-top:8px">Contact information will be published here when the studio's official contact channel is ready.</p></div></div></section>
+</main>
+<footer><div class="container footer-inner"><div>© <span id="currentYear"></span> LARA GAME STUDIO</div><div class="footer-links"><a href="#privacy">Privacy Policy</a><a href="#terms">Terms of Service</a></div></div></footer>
+<section id="privacy"><div class="container"><div class="section-title"><h2>Privacy Policy</h2><p>Privacy information for visitors to LARA GAME STUDIO.</p></div><div class="card"><h3>Information We Collect</h3><p>LARA GAME STUDIO does not intentionally collect personal information through this website unless you choose to provide it through an official contact or service linked from this site.</p><h3 style="margin-top:22px">Advertising & External Links</h3><p>This website may contain advertising, affiliate links, or links to third-party services. Those services may have their own privacy policies and terms.</p><h3 style="margin-top:22px">Changes</h3><p>This Privacy Policy may be updated when the website or its services change.</p></div></div></section>
+<section id="terms"><div class="container"><div class="section-title"><h2>Terms of Service</h2><p>General terms for using the LARA GAME STUDIO website.</p></div><div class="card"><h3>Website Use</h3><p>You may use this website for lawful personal and informational purposes. Do not misuse, disrupt, or attempt to compromise the website or its services.</p><h3 style="margin-top:22px">Content</h3><p>Website content, branding, graphics, and future game-related materials belong to LARA GAME STUDIO or their respective owners unless otherwise stated.</p><h3 style="margin-top:22px">External Services</h3><p>Links to third-party websites or advertising services are provided for convenience. LARA GAME STUDIO is not responsible for the content or policies of external services.</p><h3 style="margin-top:22px">Changes</h3><p>These Terms of Service may be updated as the studio and website develop.</p></div></div></section>
+<script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+</body>
+</html>
