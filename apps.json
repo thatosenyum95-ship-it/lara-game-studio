@@ -1,13 +1,13 @@
 [
   {
-    "name":"Contoh APK",
-    "shortDescription":"Contoh entri. Nanti diganti dengan APK buatan Lara Studio.",
-    "description":"Tempat untuk menjelaskan fungsi dan keunggulan aplikasi.",
-    "category":"Tools",
-    "version":"1.0.0",
-    "size":"—",
-    "icon":"📱",
-    "status":"SEGERA HADIR",
-    "page":"#"
+    "name": "Contoh APK",
+    "shortDescription": "Aplikasi Android buatan Lara Studio.",
+    "description": "Aplikasi Android buatan Lara Studio.",
+    "category": "Tools",
+    "version": "1.0.0",
+    "size": "25 MB",
+    "icon": "📱",
+    "status": "SEGERA HADIR",
+    "page": "apps/contoh.html"
   }
 ]
