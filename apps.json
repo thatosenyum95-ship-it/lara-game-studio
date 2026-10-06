@@ -1,0 +1,5 @@
+[
+  {"slug":"novelara","name":"Novelara","shortDescription":"Aplikasi membaca novel dengan antarmuka sederhana dan nyaman.","version":"1.0.0","size":"Segera","status":"SEGERA","icon":"📚","page":"apps/novelara.html"},
+  {"slug":"bolakita","name":"Bolakita","shortDescription":"Aplikasi bertema sepak bola untuk informasi dan konten pertandingan.","version":"1.0.0","size":"Segera","status":"SEGERA","icon":"⚽","page":"apps/bolakita.html"},
+  {"slug":"cekbantu","name":"CekBantu","shortDescription":"Aplikasi utilitas yang membantu pengguna melakukan pengecekan tertentu.","version":"1.0.0","size":"Segera","status":"SEGERA","icon":"🛠️","page":"apps/cekbantu.html"}
+]
