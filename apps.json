@@ -22,11 +22,12 @@
       "📱 Dioptimalkan untuk Android"
     ],
     "screenshots": [
-      "📱",
-      "✨",
-      "⚙️",
-      "🚀"
+      "apps/contoh/screenshots/01.webp",
+      "apps/contoh/screenshots/02.webp",
+      "apps/contoh/screenshots/03.webp",
+      "apps/contoh/screenshots/04.webp"
     ],
-    "downloadUrl": ""
+    "downloadUrl": "apps/contoh/app.apk",
+    "iconUrl": "apps/contoh/icon.webp"
   }
 ]
