@@ -17,19 +17,21 @@ main{padding:34px 0 70px}.crumb{color:#9993aa;font-size:13px;margin-bottom:22px}
 <body>
 <header><div class="wrap"><nav><a class="brand" href="../index.html"><span class="logo">L</span><span>Lara Studio</span></a><a class="back" href="../index.html">← Kembali</a></nav></div></header>
 <main><div class="wrap">
-<div class="crumb">Lara Studio / Aplikasi / <b>Contoh APK</b></div>
+<div class="crumb">Lara Studio / Aplikasi / <b id="crumbName">APK</b></div>
 <section class="apphead">
-<div class="icon">📱</div>
-<div><span class="tag">TOOLS</span><h1 class="title">Contoh APK</h1><p class="subtitle">Aplikasi Android buatan Lara Studio.</p><div class="stats"><span>⭐ 4.8</span><span>📥 1K+ downloads</span><span>📦 25 MB</span><span>Android 8+</span></div></div>
-<a class="download" href="#" onclick="alert('File APK belum ditambahkan.');return false">⬇️ Download APK</a>
+<div class="icon" id="appIcon">📱</div>
+<div><span class="tag" id="appCategory">TOOLS</span><h1 class="title" id="appName">Memuat...</h1><p class="subtitle" id="appShort"></p><div class="stats"><span id="appRating"></span><span id="appDownloads"></span><span id="appSize"></span><span id="appAndroid"></span></div></div>
+<a class="download" id="downloadBtn" href="#" onclick="return false">⬇️ Download APK</a>
 </section>
 <div class="ad">RUANG IKLAN</div>
 <div class="layout"><div>
 <section class="panel"><h2>📸 Screenshot & Tampilan</h2><div class="screens"><div class="screen">📱<small> Screenshot 1</small></div><div class="screen">✨<small> Screenshot 2</small></div><div class="screen">⚙️<small> Screenshot 3</small></div><div class="screen">🚀<small> Screenshot 4</small></div></div></section>
-<section class="panel"><h2>📝 Tentang aplikasi</h2><p>Ini adalah tempat untuk menampilkan penjelasan lengkap tentang APK. Nanti teks ini akan diganti dengan deskripsi aplikasi yang sebenarnya.</p><p>Deskripsi dapat menjelaskan fungsi aplikasi, siapa yang cocok menggunakannya, serta keunggulan utama aplikasi tersebut.</p></section>
-<section class="panel"><h2>✨ Fitur utama</h2><div class="feature"><div>🚀 Cepat dan ringan</div><div>🎨 Tampilan modern</div><div>🔐 Aman digunakan</div><div>📱 Dioptimalkan untuk Android</div></div></section>
+<section class="panel"><h2>📝 Tentang aplikasi</h2><p id="appDescription"></p></section>
+<section class="panel"><h2>✨ Fitur utama</h2><div class="feature" id="features"></div></section>
 </div>
-<aside class="side"><section class="panel"><h3>📦 Informasi APK</h3><div class="info"><div class="row"><span>Versi</span><span>1.0.0</span></div><div class="row"><span>Ukuran</span><span>25 MB</span></div><div class="row"><span>Android</span><span>8.0+</span></div><div class="row"><span>Update</span><span>2026</span></div><div class="row"><span>Developer</span><span>Lara Studio</span></div></div></section><section class="panel"><h3>📂 Kategori</h3><span class="category">🛠️ Tools</span></section><div class="ad">RUANG IKLAN</div></aside>
+<aside class="side"><section class="panel"><h3>📦 Informasi APK</h3><div class="info"><div class="row"><span>Versi</span><span id="infoVersion">—</span></div><div class="row"><span>Ukuran</span><span id="infoSize">—</span></div><div class="row"><span>Android</span><span id="infoAndroid">—</span></div><div class="row"><span>Update</span><span id="infoUpdate">—</span></div><div class="row"><span>Developer</span><span id="infoDeveloper">—</span></div></div></section><section class="panel"><h3>📂 Kategori</h3><span class="category" id="infoCategory">—</span></section><div class="ad">RUANG IKLAN</div></aside>
 </div>
 </div></main>
-</body></html>
+<script>
+fetch("../apps.json").then(function(r){return r.json()}).then(function(apps){var a=apps.find(function(x){return x.page==="apps/contoh.html"})||apps[0];if(!a)return;document.title=a.name+" — Lara Studio";document.getElementById("crumbName").textContent=a.name;document.getElementById("appIcon").textContent=a.icon||"📱";document.getElementById("appCategory").textContent=(a.category||"APK").toUpperCase();document.getElementById("appName").textContent=a.name;document.getElementById("appShort").textContent=a.shortDescription||"";document.getElementById("appRating").textContent="⭐ "+(a.rating||"—");document.getElementById("appDownloads").textContent="📥 "+(a.downloads||"—")+" downloads";document.getElementById("appSize").textContent="📦 "+(a.size||"—");document.getElementById("appAndroid").textContent="Android "+(a.android||"—");document.getElementById("appDescription").textContent=a.description||"";document.getElementById("infoVersion").textContent=a.version||"—";document.getElementById("infoSize").textContent=a.size||"—";document.getElementById("infoAndroid").textContent=a.android||"—";document.getElementById("infoUpdate").textContent=a.update||"—";document.getElementById("infoDeveloper").textContent=a.developer||"Lara Studio";document.getElementById("infoCategory").textContent=a.category||"—";document.getElementById("features").innerHTML=(a.features||[]).map(function(x){return "<div>"+x+"</div>"}).join("");var b=document.getElementById("downloadBtn");if(a.downloadUrl){b.href=a.downloadUrl;b.target="_blank";b.onclick=null}else{b.onclick=function(){alert("File APK belum ditambahkan.");return false}}}).catch(function(){document.getElementById("appName").textContent="APK tidak dapat dimuat"});
+</script></body></html>
