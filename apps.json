@@ -1,13 +1,32 @@
 [
   {
+    "id": "contoh-apk",
     "name": "Contoh APK",
     "shortDescription": "Aplikasi Android buatan Lara Studio.",
-    "description": "Aplikasi Android buatan Lara Studio.",
+    "description": "Aplikasi Android buatan Lara Studio. Halaman ini menjadi template lengkap untuk setiap aplikasi yang akan dipublikasikan di Lara Studio.",
     "category": "Tools",
     "version": "1.0.0",
     "size": "25 MB",
+    "android": "8.0+",
     "icon": "📱",
     "status": "SEGERA HADIR",
-    "page": "apps/contoh.html"
+    "rating": "4.8",
+    "downloads": "1K+",
+    "update": "2026",
+    "developer": "Lara Studio",
+    "page": "apps/contoh.html",
+    "features": [
+      "🚀 Cepat dan ringan",
+      "🎨 Tampilan modern",
+      "🔐 Aman digunakan",
+      "📱 Dioptimalkan untuk Android"
+    ],
+    "screenshots": [
+      "📱",
+      "✨",
+      "⚙️",
+      "🚀"
+    ],
+    "downloadUrl": ""
   }
 ]
