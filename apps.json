@@ -6,7 +6,7 @@
     "description": "MultiTools adalah aplikasi utilitas Android yang menggabungkan berbagai alat bantu seperti kalkulator, clipboard, converter, informasi perangkat, network tools, generator password, dan senter dalam satu aplikasi.",
     "category": "Tools",
     "version": "1.0",
-    "size": "15.6 MB",
+    "size": "16.4 MB",
     "android": "8.0+",
     "icon": "🛠️",
     "status": "TERSEDIA",
@@ -15,9 +15,17 @@
     "update": "2026",
     "developer": "Lara Studio",
     "page": "apps/multitools.html",
-    "features": ["🧮 Kalkulator","📋 Clipboard tools","🔄 Converter","📱 Informasi perangkat","🌐 Network tools","🔐 Password generator","🔦 Senter"],
+    "features": [
+      "🧮 Kalkulator",
+      "📋 Clipboard tools",
+      "🔄 Converter",
+      "📱 Informasi perangkat",
+      "🌐 Network tools",
+      "🔐 Password generator",
+      "🔦 Senter"
+    ],
     "screenshots": [],
-    "downloadUrl": "apps/multitools/MultiTools.apk",
+    "downloadUrl": "apps/multitools/MultiTools-Creative.apk",
     "iconUrl": "apps/multitools/icon.webp"
   }
 ]
