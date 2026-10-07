@@ -1,33 +1,8 @@
 [
   {
-    "id": "contoh-apk",
-    "name": "Contoh APK",
-    "shortDescription": "Aplikasi Android buatan Lara Studio.",
-    "description": "Aplikasi Android buatan Lara Studio. Halaman ini menjadi template lengkap untuk setiap aplikasi yang akan dipublikasikan di Lara Studio.",
-    "category": "Tools",
-    "version": "1.0.0",
-    "size": "25 MB",
-    "android": "8.0+",
-    "icon": "📱",
-    "status": "SEGERA HADIR",
-    "rating": "4.8",
-    "downloads": "1K+",
-    "update": "2026",
-    "developer": "Lara Studio",
-    "page": "apps/contoh.html",
-    "features": [
-      "🚀 Cepat dan ringan",
-      "🎨 Tampilan modern",
-      "🔐 Aman digunakan",
-      "📱 Dioptimalkan untuk Android"
-    ],
-    "screenshots": [
-      "apps/contoh/screenshots/01.webp",
-      "apps/contoh/screenshots/02.webp",
-      "apps/contoh/screenshots/03.webp",
-      "apps/contoh/screenshots/04.webp"
-    ],
-    "downloadUrl": "apps/contoh/app.apk",
-    "iconUrl": "apps/contoh/icon.webp"
+    "id":"contoh-apk","name":"Contoh APK","shortDescription":"Aplikasi Android buatan Lara Studio.","description":"Aplikasi Android buatan Lara Studio. Halaman ini menjadi template lengkap untuk setiap aplikasi yang akan dipublikasikan di Lara Studio.","category":"Tools","version":"1.0.0","size":"25 MB","android":"8.0+","icon":"📱","status":"SEGERA HADIR","rating":"4.8","downloads":"1K+","update":"2026","developer":"Lara Studio","page":"apps/contoh.html","features":["🚀 Cepat dan ringan","🎨 Tampilan modern","🔐 Aman digunakan","📱 Dioptimalkan untuk Android"],"screenshots":["apps/contoh/screenshots/01.webp","apps/contoh/screenshots/02.webp","apps/contoh/screenshots/03.webp","apps/contoh/screenshots/04.webp"],"downloadUrl":"apps/contoh/app.apk","iconUrl":"apps/contoh/icon.webp"
+  },
+  {
+    "id":"multitools","name":"MultiTools","shortDescription":"Kumpulan alat bantu Android dalam satu aplikasi.","description":"MultiTools adalah aplikasi utilitas Android yang menggabungkan berbagai alat bantu seperti kalkulator, clipboard, converter, informasi perangkat, network tools, generator password, dan senter dalam satu aplikasi.","category":"Tools","version":"1.0","size":"15.6 MB","android":"8.0+","icon":"🛠️","status":"TERSEDIA","rating":"—","downloads":"—","update":"2026","developer":"Lara Studio","page":"apps/multitools.html","features":["🧮 Kalkulator","📋 Clipboard tools","🔄 Converter","📱 Informasi perangkat","🌐 Network tools","🔐 Password generator","🔦 Senter"],"screenshots":[],"downloadUrl":"apps/multitools/MultiTools-Creative.apk","iconUrl":"apps/multitools/icon.webp"
   }
 ]
