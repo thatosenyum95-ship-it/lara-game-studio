@@ -31,11 +31,9 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p apps/multitools
-          RUN_ID=$(gh api "repos/thatosenyum95-ship-it/MultiTools/actions/workflows/build.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id')
-          test -n "$RUN_ID"
-
-          ARTIFACT_ID=$(gh api "repos/thatosenyum95-ship-it/MultiTools/actions/runs/$RUN_ID/artifacts?per_page=100" --jq '.artifacts[] | select(.name=="MultiTools-debug") | .id' | head -n1)
-          test -n "$ARTIFACT_ID"
+          # Pin the store to the audited original MultiTools APK.
+          RUN_ID=37661580610
+          ARTIFACT_ID=11501655996
 
           gh api --method GET "repos/thatosenyum95-ship-it/MultiTools/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/multitools.zip
           rm -rf /tmp/multitools
@@ -48,10 +46,9 @@ jobs:
 
           test -f apps/multitools/MultiTools-Creative.apk
           SIZE=$(stat -c%s apps/multitools/MultiTools-Creative.apk)
-          test "$SIZE" -gt 1000000
-          SHA256=$(sha256sum apps/multitools/MultiTools-Creative.apk | cut -d" " -f1)
-          echo "Published APK size: $SIZE bytes"
-          echo "Published APK SHA-256: $SHA256"
+          test "$SIZE" -eq 16403746
+          echo "c1b04b3dfb508bd69d5dbf2e38e89396beabb14962ca3f7e5ad364d456511677  apps/multitools/MultiTools-Creative.apk" | sha256sum -c -
+          file apps/multitools/MultiTools-Creative.apk | grep -Ei 'Android|Zip archive|Java archive'
           file apps/multitools/MultiTools-Creative.apk | grep -Ei 'Android|Zip archive|Java archive'
 
       - name: Setup Pages
