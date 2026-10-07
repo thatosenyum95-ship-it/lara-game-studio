@@ -30,7 +30,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           repo: thatosenyum95-ship-it/MultiTools
-          workflow: Build MultiTools APK
+          workflow: build.yml
           workflow_conclusion: success
           name: MultiTools-debug
           path: apps/multitools
