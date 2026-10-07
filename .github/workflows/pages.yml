@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -18,11 +19,27 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: \${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Download latest MultiTools APK
+        uses: dawidd6/action-download-artifact@v25
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repo: thatosenyum95-ship-it/MultiTools
+          workflow: Build MultiTools APK
+          workflow_conclusion: success
+          name: MultiTools-debug
+          path: apps/multitools
+          if_no_artifact_found: fail
+
+      - name: Prepare APK filename
+        run: |
+          test -f apps/multitools/app-debug.apk
+          mv apps/multitools/app-debug.apk apps/multitools/MultiTools-Creative.apk
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
