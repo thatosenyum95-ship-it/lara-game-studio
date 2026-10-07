@@ -19,7 +19,7 @@ main{padding:22px 18px}.welcome{padding:12px 0 25px}.welcome small{color:#a78bfa
 </head>
 <body>
 <div class="app">
-<header class="topbar"><a class="brand" href="#" onclick="showScreen('home');return false"><span class="logo">L</span><span>Lara Studio</span><small style="color:#716b80;font-size:9px;margin-left:4px">v2026.10.08</small></a><button class="topSearch" onclick="showScreen('search')" aria-label="Cari">⌕</button></header>
+<header class="topbar"><a class="brand" href="#" onclick="showScreen('home');return false"><span class="logo">L</span><span>Lara Studio</span><small style="color:#716b80;font-size:9px;margin-left:4px">v2026.10.08</small></a><button id="topSearch" class="topSearch" type="button" aria-label="Cari">⌕</button></header>
 <main>
 <section id="home" class="screen active">
 <div class="welcome"><small>LARA STUDIO</small><h1>Temukan aplikasi<br>yang kamu butuhkan.</h1><p>Koleksi APK Android buatan Lara Studio. Download langsung dari halaman aplikasi.</p></div>
@@ -49,9 +49,9 @@ main{padding:22px 18px}.welcome{padding:12px 0 25px}.welcome small{color:#a78bfa
 </section>
 </main>
 <nav class="bottomNav" aria-label="Navigasi utama">
-<button class="navBtn" data-screen="games" onclick="showScreen('games')"><span class="ico">🎮</span>Game</button>
-<button class="navBtn" data-screen="apps" onclick="showScreen('apps')"><span class="ico">▦</span>Aplikasi</button>
-<button class="navBtn" data-screen="search" onclick="showScreen('search')"><span class="ico">⌕</span>Telusuri</button>
+<button class="navBtn" data-screen="games" type="button"><span class="ico">🎮</span>Game</button>
+<button class="navBtn" data-screen="apps" type="button"><span class="ico">▦</span>Aplikasi</button>
+<button class="navBtn" data-screen="search" type="button"><span class="ico">⌕</span>Telusuri</button>
 </nav>
 </div>
 <script src="js/store.js?v=20261008"></script>
@@ -60,9 +60,9 @@ var allApps=[],activeCategory='all';
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function icon(a,cls){return a.iconUrl?'<div class="'+cls+'"><img src="'+esc(a.iconUrl)+'" alt="'+esc(a.name)+'"></div>':'<div class="'+cls+'">'+esc(a.icon||'📱')+'</div>'}
 function item(a){return '<a class="listItem" href="'+esc(safePage(a.page)||'#')+'"'+(safePage(a.page)?'':' aria-disabled="true"')+' onclick="return !!safePage('+JSON.stringify(a.page||'')+')">'+icon(a,'appIcon')+'<div class="listInfo"><b>'+esc(a.name)+'</b><p>'+esc(a.shortDescription||a.category||'Aplikasi Android')+'</p></div><span class="go">›</span></a>'}
-function card(a){var stats='📦 '+esc(a.size||'—');if(Number(a.ratingCount||0)>0)stats+=' · ⭐ '+esc(a.rating);if(Number(a.downloadCount||0)>0)stats+=' · 📥 '+esc(a.downloadCount);return '<article class="appCard">'+
+function card(a){var stats='📦 '+esc(a.size||'—');if(Number(a.ratingCount||0)>0)stats+=' · ⭐ '+esc(a.rating);if(Number(a.downloadCount||0)>0)stats+=' · 📥 '+esc(a.downloadCount);var p=safePage(a.page);return '<article class="appCard">'+
 '<div class="appTop">'+icon(a,'appIcon')+'<div><div class="appName">'+esc(a.name)+'</div><div class="appCat">'+esc(a.category||'Aplikasi')+' · v'+esc(a.version||'—')+'</div>'+(a.verified?'<div class="verified">✓ Terverifikasi</div>':'')+'</div></div>'+
-'<p class="appDesc">'+esc(a.shortDescription||'')+'</p><div class="appMeta">'+stats+'</div><a class="openBtn" href="'+esc(a.page||'#')+'">Lihat aplikasi</a></article>'}
+'<p class="appDesc">'+esc(a.shortDescription||'')+'</p><div class="appMeta">'+stats+'</div>'+(p?'<a class="openBtn" href="'+esc(p)+'">Lihat aplikasi</a>':'<div class="openBtn" style="opacity:.5;cursor:not-allowed">APK belum tersedia</div>')+'</article>'}
 function renderHome(){document.getElementById('homeApps').innerHTML=allApps.length?allApps.map(card).join(''):'<div class="empty"><strong>Belum ada aplikasi</strong>Aplikasi yang ditambahkan akan muncul di sini.</div>';document.getElementById('latest').innerHTML=allApps.length?allApps.map(item).join(''):'<div class="empty">Belum ada APK.</div>';document.getElementById('appCount').textContent=allApps.length+' tersedia';renderGames()}function renderGames(){var games=allApps.filter(function(a){return (a.category||'')==='Games'});document.getElementById('gameList').innerHTML=games.length?games.map(item).join(''):'<div class="empty"><strong>🎮 Belum ada game</strong>Game yang ditambahkan dengan kategori Games akan muncul otomatis di sini.</div>'}
 function categories(){var order=[['Tools','🛠️'],['Games','🎮'],['Education','📚'],['Productivity','📈'],['Photography','📷'],['Music & Audio','🎵'],['Video & Media','🎬'],['Social','💬'],['Internet','🌐'],['Security','🔐'],['Customization','🎨'],['AI','🤖'],['Finance','💰'],['Utilities','🔧']];var map={};allApps.forEach(function(a){var c=String(a.category||'').trim();if(c)map[c]=(map[c]||0)+1});var html=order.map(function(x){var n=map[x[0]]||0;return '<button type="button" class="catBtn" data-category="'+esc(x[0])+'"><div class="catIcon">'+x[1]+'</div><b>'+esc(x[0])+'</b><span>'+n+' aplikasi</span></button>'}).join('');document.getElementById('categories').innerHTML=html||'<div class="empty">Belum ada kategori.</div>';document.querySelectorAll('#categories .catBtn').forEach(function(btn){btn.addEventListener('click',function(){openCategory(btn.dataset.category)})})}
 function openCategory(c){activeCategory=c;var list=allApps.filter(function(a){return String(a.category||'').trim()===c});var box=document.getElementById('categoryApps');if(!list.length){box.innerHTML='<div class="empty"><strong>'+esc(c)+'</strong>Belum ada APK di kategori ini.</div>';box.scrollIntoView({behavior:'smooth',block:'start'});return}if(list.length===1&&safePage(list[0].page)){window.location.href=list[0].page;return}box.innerHTML='<div class="sectionHead"><h2>'+esc(c)+'</h2><span>'+list.length+' aplikasi</span></div><div class="list">'+list.map(item).join('')+'</div>';box.scrollIntoView({behavior:'smooth',block:'start'})}
@@ -70,6 +70,8 @@ function renderSearch(){var q=(document.getElementById('searchInput').value||'')
 function safePage(p){return p&&p!=='#'?p:null}
 function showScreen(id){document.querySelectorAll('.screen').forEach(function(x){x.classList.toggle('active',x.id===id)});document.querySelectorAll('.navBtn').forEach(function(x){x.classList.toggle('active',x.dataset.screen===id)});window.scrollTo({top:0,behavior:'smooth'});if(id==='search'){setTimeout(function(){document.getElementById('searchInput').focus()},100)}}
 document.getElementById('searchInput').addEventListener('input',renderSearch);
+document.getElementById('topSearch').addEventListener('click',function(){showScreen('search')});
+document.querySelectorAll('.navBtn').forEach(function(btn){btn.addEventListener('click',function(){showScreen(btn.dataset.screen)})});
 fetch('apps.json?v=20261008-4').then(function(r){return r.json()}).then(function(base){allApps=(Array.isArray(base)?base:[]).map(function(a){return Object.assign({},a,{downloadCount:Number(a.downloadCount||0),ratingCount:Number(a.ratingCount||0),reviewCount:Number(a.reviewCount||0),rating:a.rating==null?null:Number(a.rating)})});renderHome();categories();laraStats().then(function(live){var byId={};(Array.isArray(live)?live:[]).forEach(function(x){byId[x.id]=x});allApps=allApps.map(function(a){var s=byId[a.id]||{};return Object.assign({},a,{downloadCount:Number(s.download_count||0),ratingCount:Number(s.rating_count||0),reviewCount:Number(s.review_count||0),rating:s.rating==null?null:Number(s.rating)})});renderHome()}).catch(function(){})}).catch(function(){document.getElementById('homeApps').innerHTML='<div class="empty"><strong>Data belum tersedia</strong>Coba lagi sebentar.</div>'});
 </script>
 </body>
