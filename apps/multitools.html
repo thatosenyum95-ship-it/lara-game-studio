@@ -25,7 +25,6 @@ document.getElementById("download").addEventListener("click",async function(e){
   btn.textContent="⬇️ Menyiapkan download...";
   try{
     await laraTrackDownload(appId).catch(function(){});
-    var r=await fetch("../js/store.js?v=20261008-2").catch(function(){return null});
     var proxy="https://atswttlqjycruzxuohfw.supabase.co/functions/v1/store-api?download=multitools";
     var res=await fetch(proxy,{cache:"no-store"});
     if(!res.ok) throw new Error("download_failed");
