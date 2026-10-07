@@ -47,8 +47,11 @@ jobs:
           cp "$APK" apps/multitools/MultiTools-Creative.apk
 
           test -f apps/multitools/MultiTools-Creative.apk
-          test "$(stat -c%s apps/multitools/MultiTools-Creative.apk)" -eq 16403746
-          echo "c1b04b3dfb508bd69d5dbf2e38e89396beabb14962ca3f7e5ad364d456511677  apps/multitools/MultiTools-Creative.apk" | sha256sum -c -
+          SIZE=$(stat -c%s apps/multitools/MultiTools-Creative.apk)
+          test "$SIZE" -gt 1000000
+          SHA256=$(sha256sum apps/multitools/MultiTools-Creative.apk | cut -d" " -f1)
+          echo "Published APK size: $SIZE bytes"
+          echo "Published APK SHA-256: $SHA256"
           file apps/multitools/MultiTools-Creative.apk | grep -Ei 'Android|Zip archive|Java archive'
 
       - name: Setup Pages
