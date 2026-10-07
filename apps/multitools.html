@@ -7,8 +7,8 @@ body{margin:0;background:radial-gradient(circle at 80% 0%,#26104d 0,transparent 
 <h1>MultiTools</h1><p class="meta">Kumpulan alat bantu Android dalam satu aplikasi.</p>
 <p>Versi 1.0 · Android 8.0+ · Package: com.multitools.app · Tools</p>
 <div id="stats" class="stats"></div>
-<a id="download" class="btn" href="multitools/MultiTools-Creative.apk" download="MultiTools-Creative.apk">⬇️ Download MultiTools APK</a>
-<p id="downloadNote" class="small">APK resmi terverifikasi.</p></section>
+<a id="download" class="btn" href="#" role="button">⬇️ Download MultiTools APK</a>
+<p id="downloadNote" class="small">✅ Lara Studio Verified Artifact · <a href="../verify/multitools.html" style="color:#c9c0ff">Lihat asal & verifikasi APK</a></p></section>
 <section class="card"><h2>⭐ Beri rating</h2><p class="meta">Rating rata-rata hanya ditampilkan setelah ada rating pengguna.</p><div id="ratingButtons" class="ratingBox"><button type="button" class="star" data-star="1">1 ⭐</button><button type="button" class="star" data-star="2">2 ⭐</button><button type="button" class="star" data-star="3">3 ⭐</button><button type="button" class="star" data-star="4">4 ⭐</button><button type="button" class="star" data-star="5">5 ⭐</button></div><div id="ratingMsg" class="small"></div></section>
 <section class="card reviewForm"><h2>💬 Tulis ulasan</h2><textarea id="reviewText" maxlength="1000" placeholder="Bagikan pengalamanmu dengan MultiTools..."></textarea><button type="button" id="reviewBtn" class="btn">Kirim ulasan</button><div id="reviewMsg" class="small"></div><div id="reviews"></div></section>
 </main>
@@ -18,14 +18,30 @@ function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){retur
 function renderStats(a){var e=document.getElementById("stats"),x="";if(Number(a.rating_count)>0)x+="<span class='pill'>⭐ "+esc(a.rating)+" ("+esc(a.rating_count)+" rating)</span>";if(Number(a.download_count)>0)x+="<span class='pill'>📥 "+esc(a.download_count)+" download</span>";if(Number(a.review_count)>0)x+="<span class='pill'>💬 "+esc(a.review_count)+" ulasan</span>";e.innerHTML=x}
 async function load(){try{var all=await laraStats();var a=all.find(function(x){return x.id===appId});if(a)renderStats(a);var reviews=await laraReviews(appId);renderReviews(reviews)}catch(e){document.getElementById("downloadNote").textContent="APK resmi tersedia."}}
 function renderReviews(items){var box=document.getElementById("reviews");if(!items.length){box.innerHTML="";return}box.innerHTML="<h3>Ulasan terbaru</h3>"+items.map(function(r){return "<div class='review'><div>"+esc(r.body)+"</div><div class='small'>"+laraFormatDate(r.created_at)+"</div></div>"}).join("")}
-document.getElementById("download").addEventListener("click",function(e){
+document.getElementById("download").addEventListener("click",async function(e){
+  e.preventDefault();
   var btn=e.currentTarget;
   btn.setAttribute("aria-busy","true");
   btn.textContent="⬇️ Menyiapkan download...";
-  laraTrackDownload(appId).catch(function(){}).finally(function(){
+  try{
+    await laraTrackDownload(appId).catch(function(){});
+    var r=await fetch("../js/store.js?v=20261008-2").catch(function(){return null});
+    var proxy="https://atswttlqjycruzxuohfw.supabase.co/functions/v1/store-api?download=multitools";
+    var res=await fetch(proxy,{cache:"no-store"});
+    if(!res.ok) throw new Error("download_failed");
+    var blob=await res.blob();
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a");
+    a.href=url;a.download="MultiTools-Creative.apk";
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url)},60000);
+    document.getElementById("downloadNote").textContent="✅ Download dimulai dari distribusi resmi Lara Studio.";
+  }catch(err){
+    document.getElementById("downloadNote").textContent="Download belum berhasil. Coba lagi atau buka halaman verifikasi.";
+  }finally{
     btn.removeAttribute("aria-busy");
     btn.textContent="⬇️ Download MultiTools APK";
-  });
+  }
 });
 document.querySelectorAll(".star").forEach(function(b){b.addEventListener("click",async function(){var msg=document.getElementById("ratingMsg");msg.textContent="Menyimpan rating...";try{await laraRate(appId,b.dataset.star);msg.textContent="Rating tersimpan. Terima kasih!";b.classList.add("active");load()}catch(e){msg.textContent="Rating belum dapat disimpan."}})});
 document.getElementById("reviewBtn").addEventListener("click",async function(){var t=document.getElementById("reviewText"),msg=document.getElementById("reviewMsg");if(t.value.trim().length<3){msg.textContent="Ulasan minimal 3 karakter.";return}msg.textContent="Mengirim...";try{await laraReview(appId,t.value);t.value="";msg.textContent="Ulasan tersimpan. Terima kasih!";load()}catch(e){msg.textContent="Ulasan belum dapat disimpan."}});
