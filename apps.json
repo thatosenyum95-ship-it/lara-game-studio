@@ -31,6 +31,16 @@
     "downloadCount": 0,
     "reviewCount": 0,
     "sha256": "c1b04b3dfb508bd69d5dbf2e38e89396beabb14962ca3f7e5ad364d456511677",
-    "verified": true
+    "verified": true,
+    "official": true,
+    "verificationPage": "verify/multitools.html",
+    "downloadProxy": "https://atswttlqjycruzxuohfw.supabase.co/functions/v1/store-api?download=multitools",
+    "provenance": {
+      "artifact": "MultiTools-Creative.apk",
+      "distribution": "Lara Studio Download Proxy",
+      "storageOrigin": "GitHub Pages / Lara Studio",
+      "buildPipeline": "GitHub Actions",
+      "sha256": "c1b04b3dfb508bd69d5dbf2e38e89396beabb14962ca3f7e5ad364d456511677"
+    }
   }
 ]
