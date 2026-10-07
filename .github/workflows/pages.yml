@@ -29,18 +29,26 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -e
+          set -euo pipefail
           mkdir -p apps/multitools
           RUN_ID=$(gh api "repos/thatosenyum95-ship-it/MultiTools/actions/workflows/build.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id')
           test -n "$RUN_ID"
+
           ARTIFACT_ID=$(gh api "repos/thatosenyum95-ship-it/MultiTools/actions/runs/$RUN_ID/artifacts?per_page=100" --jq '.artifacts[] | select(.name=="MultiTools-debug") | .id' | head -n1)
           test -n "$ARTIFACT_ID"
+
           gh api --method GET "repos/thatosenyum95-ship-it/MultiTools/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/multitools.zip
-          unzip -o /tmp/multitools.zip -d apps/multitools
-          test -f apps/multitools/app-debug.apk
-          mv apps/multitools/app-debug.apk apps/multitools/MultiTools.apk
-          test -s apps/multitools/MultiTools.apk
-          file apps/multitools/MultiTools.apk
+          rm -rf /tmp/multitools
+          mkdir -p /tmp/multitools
+          unzip -o /tmp/multitools.zip -d /tmp/multitools
+
+          APK=$(find /tmp/multitools -type f -name 'app-debug.apk' -print -quit)
+          test -n "$APK"
+          cp "$APK" apps/multitools/MultiTools-Creative.apk
+
+          test -f apps/multitools/MultiTools-Creative.apk
+          test "$(stat -c%s apps/multitools/MultiTools-Creative.apk)" -eq 16403746
+          file apps/multitools/MultiTools-Creative.apk | grep -Ei 'Android|Zip archive|Java archive'
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
