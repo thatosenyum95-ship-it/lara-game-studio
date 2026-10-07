@@ -15,17 +15,9 @@
     "update": "2026",
     "developer": "Lara Studio",
     "page": "apps/multitools.html",
-    "features": [
-      "🧮 Kalkulator",
-      "📋 Clipboard tools",
-      "🔄 Converter",
-      "📱 Informasi perangkat",
-      "🌐 Network tools",
-      "🔐 Password generator",
-      "🔦 Senter"
-    ],
+    "features": ["🧮 Kalkulator","📋 Clipboard tools","🔄 Converter","📱 Informasi perangkat","🌐 Network tools","🔐 Password generator","🔦 Senter"],
     "screenshots": [],
-    "downloadUrl": "apps/multitools/MultiTools-Creative.apk",
+    "downloadUrl": "apps/multitools/MultiTools.apk",
     "iconUrl": "apps/multitools/icon.webp"
   }
 ]
