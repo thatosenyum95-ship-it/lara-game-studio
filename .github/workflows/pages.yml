@@ -36,10 +36,11 @@ jobs:
           path: apps/multitools
           if_no_artifact_found: fail
 
-      - name: Prepare APK filename
+      - name: Prepare APK file
         run: |
           test -f apps/multitools/app-debug.apk
-          mv apps/multitools/app-debug.apk apps/multitools/MultiTools-Creative.apk
+          mv apps/multitools/app-debug.apk apps/multitools/MultiTools.apk
+          file apps/multitools/MultiTools.apk
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
