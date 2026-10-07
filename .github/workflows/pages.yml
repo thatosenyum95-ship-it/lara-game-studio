@@ -49,7 +49,6 @@ jobs:
           test "$SIZE" -eq 16403746
           echo "c1b04b3dfb508bd69d5dbf2e38e89396beabb14962ca3f7e5ad364d456511677  apps/multitools/MultiTools-Creative.apk" | sha256sum -c -
           file apps/multitools/MultiTools-Creative.apk | grep -Ei 'Android|Zip archive|Java archive'
-          file apps/multitools/MultiTools-Creative.apk | grep -Ei 'Android|Zip archive|Java archive'
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
