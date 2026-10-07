@@ -10,7 +10,7 @@
     "android": "8.0+",
     "icon": "🛠️",
     "status": "TERSEDIA",
-    "rating": "—",
+    "rating": null,
     "downloads": "—",
     "update": "2026",
     "developer": "Lara Studio",
@@ -26,6 +26,11 @@
     ],
     "screenshots": [],
     "downloadUrl": "apps/multitools/MultiTools-Creative.apk",
-    "iconUrl": "apps/multitools/icon.webp"
+    "iconUrl": "apps/multitools/icon.webp",
+    "ratingCount": 0,
+    "downloadCount": 0,
+    "reviewCount": 0,
+    "sha256": "c1b04b3dfb508bd69d5dbf2e38e89396beabb14962ca3f7e5ad364d456511677",
+    "verified": true
   }
 ]
