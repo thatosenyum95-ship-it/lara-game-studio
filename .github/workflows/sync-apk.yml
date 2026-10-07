@@ -1,0 +1,43 @@
+name: Sync audited MultiTools APK
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch audited APK artifact
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh api "repos/thatosenyum95-ship-it/MultiTools/actions/artifacts/11501655996/zip" > /tmp/multitools.zip
+          rm -rf /tmp/multitools
+          mkdir -p /tmp/multitools
+          unzip -o /tmp/multitools.zip -d /tmp/multitools
+          APK=/tmp/multitools/app-debug.apk
+          test -f "$APK"
+          test "$(stat -c%s "$APK")" -eq 16403746
+          echo "c1b04b3dfb508bd69d5dbf2e38e89396beabb14962ca3f7e5ad364d456511677  $APK" | sha256sum -c -
+          cp "$APK" apps/multitools/MultiTools-Creative.apk
+
+      - name: Commit exact APK
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/multitools/MultiTools-Creative.apk
+          if git diff --cached --quiet; then
+            echo "APK already matches audited binary."
+            exit 0
+          fi
+          git commit -m "sync audited MultiTools APK [skip ci]"
+          git push
