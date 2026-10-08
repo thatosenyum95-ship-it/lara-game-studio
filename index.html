@@ -71,7 +71,7 @@ document.querySelectorAll('.navBtn').forEach(function(btn){btn.addEventListener(
 var SUPABASE_PUBLIC_URL='https://atswttlqjycruzxuohfw.supabase.co';
 var SUPABASE_PUBLIC_KEY='sb_publishable_oggTNyIqnoaMtUhk-2PxUQ_9V_CHTWj';
 function loadPublishedApps(){
-  var url=SUPABASE_PUBLIC_URL+'/rest/v1/store_apps?select=*&or=(status.eq.published,official.eq.true)&order=updated_at.desc';
+  var url=SUPABASE_PUBLIC_URL+'/rest/v1/store_apps?select=*&status=eq.published&order=updated_at.desc';
   return fetch(url,{headers:{apikey:SUPABASE_PUBLIC_KEY,Authorization:'Bearer '+SUPABASE_PUBLIC_KEY}}).then(function(r){if(!r.ok)throw new Error('catalog');return r.json()}).then(function(rows){
     var db=Array.isArray(rows)?rows:[];
     if(!db.length)return;
@@ -80,7 +80,7 @@ function loadPublishedApps(){
         shortDescription:a.short_description||'',
         downloadUrl:a.download_url||'',
         iconUrl:a.icon_url||'',
-        page:a.page_slug?('apps/'+a.page_slug+'.html'):null,
+        page:a.page_slug?('apps/app.html?app='+encodeURIComponent(a.page_slug)):null,
         downloadCount:0,ratingCount:0,reviewCount:0,rating:null
       });
     });
