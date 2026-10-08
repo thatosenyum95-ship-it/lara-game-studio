@@ -1,0 +1,40 @@
+name: Capture MultiTools screenshots
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download published APK
+        run: |
+          curl -L --fail --retry 3             -o MultiTools-Creative.apk             "https://thatosenyum95-ship-it.github.io/lara-game-studio/apps/multitools/MultiTools-Creative.apk"
+          ls -lh MultiTools-Creative.apk
+
+      - name: Capture Android screenshots
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_2
+          script: |
+            adb install -r MultiTools-Creative.apk
+            adb shell pm clear com.multitools.app || true
+            adb shell monkey -p com.multitools.app 1
+            sleep 5
+            mkdir -p screenshots
+            adb exec-out screencap -p > screenshots/multitools-home.png
+            adb shell input keyevent 4
+            sleep 1
+            adb exec-out screencap -p > screenshots/multitools-back.png
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: multitools-screenshots
+          path: screenshots/*.png
+          if-no-files-found: error
