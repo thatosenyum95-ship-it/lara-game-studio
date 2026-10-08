@@ -68,7 +68,31 @@ function showScreen(id){document.querySelectorAll('.screen').forEach(function(x)
 document.getElementById('searchInput').addEventListener('input',renderSearch);
 document.getElementById('topSearch').addEventListener('click',function(){showScreen('search')});
 document.querySelectorAll('.navBtn').forEach(function(btn){btn.addEventListener('click',function(){showScreen(btn.dataset.screen)})});
-fetch('apps.json?v=20261008-4').then(function(r){return r.json()}).then(function(base){allApps=(Array.isArray(base)?base:[]).map(function(a){return Object.assign({},a,{downloadCount:Number(a.downloadCount||0),ratingCount:Number(a.ratingCount||0),reviewCount:Number(a.reviewCount||0),rating:a.rating==null?null:Number(a.rating)})});renderHome();categories();laraStats().then(function(live){var byId={};(Array.isArray(live)?live:[]).forEach(function(x){byId[x.id]=x});allApps=allApps.map(function(a){var s=byId[a.id]||{};return Object.assign({},a,{downloadCount:Number(s.download_count||0),ratingCount:Number(s.rating_count||0),reviewCount:Number(s.review_count||0),rating:s.rating==null?null:Number(s.rating)})});renderHome()}).catch(function(){})}).catch(function(){document.getElementById('homeApps').innerHTML='<div class="empty"><strong>Data belum tersedia</strong>Coba lagi sebentar.</div>'});
+var SUPABASE_PUBLIC_URL='https://atswttlqjycruzxuohfw.supabase.co';
+var SUPABASE_PUBLIC_KEY='sb_publishable_oggTNyIqnoaMtUhk-2PxUQ_9V_CHTWj';
+function loadPublishedApps(){
+  var url=SUPABASE_PUBLIC_URL+'/rest/v1/store_apps?select=*&or=(status.eq.published,official.eq.true)&order=updated_at.desc';
+  return fetch(url,{headers:{apikey:SUPABASE_PUBLIC_KEY,Authorization:'Bearer '+SUPABASE_PUBLIC_KEY}}).then(function(r){if(!r.ok)throw new Error('catalog');return r.json()}).then(function(rows){
+    var db=Array.isArray(rows)?rows:[];
+    if(!db.length)return;
+    allApps=db.map(function(a){
+      return Object.assign({},a,{
+        shortDescription:a.short_description||'',
+        downloadUrl:a.download_url||'',
+        iconUrl:a.icon_url||'',
+        page:a.page_slug?('apps/'+a.page_slug+'.html'):null,
+        downloadCount:0,ratingCount:0,reviewCount:0,rating:null
+      });
+    });
+    renderHome();categories();
+  });
+}
+fetch('apps.json?v=20261008-4').then(function(r){return r.json()}).then(function(base){
+  allApps=(Array.isArray(base)?base:[]).map(function(a){return Object.assign({},a,{downloadCount:Number(a.downloadCount||0),ratingCount:Number(a.ratingCount||0),reviewCount:Number(a.reviewCount||0),rating:a.rating==null?null:Number(a.rating)})});
+  renderHome();categories();
+  loadPublishedApps().catch(function(){});
+  laraStats().then(function(live){var byId={};(Array.isArray(live)?live:[]).forEach(function(x){byId[x.id]=x});allApps=allApps.map(function(a){var s=byId[a.id]||{};return Object.assign({},a,{downloadCount:Number(s.download_count||0),ratingCount:Number(s.rating_count||0),reviewCount:Number(s.review_count||0),rating:s.rating==null?null:Number(s.rating)})});renderHome()}).catch(function(){});
+}).catch(function(){document.getElementById('homeApps').innerHTML='<div class="empty"><strong>Data belum tersedia</strong>Coba lagi sebentar.</div>'});
 </script>
 </body>
 </html>
