@@ -7,6 +7,7 @@
 <meta name="description" content="Lara Studio — katalog aplikasi dan game Android. Temukan dan unduh APK langsung dari halaman aplikasi.">
 <link rel="canonical" href="https://lara-apk.vercel.app/">
 <meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="google-site-verification" content="JA7LnCAX8eSEibiY0tFwp2ZrooF0b4ilm1S2ee8AVfY" />
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lara Studio">
 <meta property="og:title" content="Lara Studio — Aplikasi & Game Android">
@@ -41,23 +42,9 @@ main{padding:22px 18px}.welcome{padding:12px 0 25px}.welcome small{color:#a78bfa
 <div class="statsNote">⭐ Rating dan 🔥 Popular hanya tampil setelah ada aktivitas pengguna nyata.</div>
 <div class="ad">RUANG IKLAN</div>
 </section>
-
-<section id="games" class="screen">
-<div class="welcome"><small>GAME</small><h1>Game di Lara Studio 🎮</h1><p>Koleksi game dari katalog Lara Studio.</p></div>
-<div id="gameList" class="list"></div>
-</section>
-
-<section id="apps" class="screen">
-<div class="welcome"><small>APLIKASI</small><h1>Kategori aplikasi</h1><p>Pilih kategori yang sudah terdaftar di Lara Studio.</p></div>
-<div id="categories" class="categoryGrid"></div>
-<div id="categoryApps" style="margin-top:24px"></div>
-</section>
-
-<section id="search" class="screen">
-<div class="welcome"><small>TELUSURI</small><h1>Cari di Lara Studio 🔎</h1><p>Cari aplikasi berdasarkan nama, deskripsi, atau kategori.</p></div>
-<div class="searchBox"><input id="searchInput" type="search" placeholder="Cari aplikasi..."><button onclick="renderSearch()">⌕</button></div>
-<div id="searchResults"></div>
-</section>
+<section id="games" class="screen"><div class="welcome"><small>GAME</small><h1>Game di Lara Studio 🎮</h1><p>Koleksi game dari katalog Lara Studio.</p></div><div id="gameList" class="list"></div></section>
+<section id="apps" class="screen"><div class="welcome"><small>APLIKASI</small><h1>Kategori aplikasi</h1><p>Pilih kategori yang sudah terdaftar di Lara Studio.</p></div><div id="categories" class="categoryGrid"></div><div id="categoryApps" style="margin-top:24px"></div></section>
+<section id="search" class="screen"><div class="welcome"><small>TELUSURI</small><h1>Cari di Lara Studio 🔎</h1><p>Cari aplikasi berdasarkan nama, deskripsi, atau kategori.</p></div><div class="searchBox"><input id="searchInput" type="search" placeholder="Cari aplikasi..."><button onclick="renderSearch()">⌕</button></div><div id="searchResults"></div></section>
 </main>
 <nav class="bottomNav" aria-label="Navigasi utama">
 <button class="navBtn" data-screen="games" type="button"><span class="ico">🎮</span>Game</button>
@@ -71,9 +58,7 @@ var allApps=[],activeCategory='all';
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function icon(a,cls){return a.iconUrl?'<div class="'+cls+'"><img src="'+esc(a.iconUrl)+'" alt="'+esc(a.name)+'"></div>':'<div class="'+cls+'">'+esc(a.icon||'📱')+'</div>'}
 function item(a){return '<a class="listItem" href="'+esc(safePage(a.page)||'#')+'"'+(safePage(a.page)?'':' aria-disabled="true"')+' onclick="return !!safePage('+JSON.stringify(a.page||'')+')">'+icon(a,'appIcon')+'<div class="listInfo"><b>'+esc(a.name)+'</b><p>'+esc(a.shortDescription||a.category||'Aplikasi Android')+'</p></div><span class="go">›</span></a>'}
-function card(a){var stats='📦 '+esc(a.size||'—');if(Number(a.ratingCount||0)>0)stats+=' · ⭐ '+esc(a.rating);if(Number(a.downloadCount||0)>0)stats+=' · 📥 '+esc(a.downloadCount);var p=safePage(a.page);return '<article class="appCard">'+
-'<div class="appTop">'+icon(a,'appIcon')+'<div><div class="appName">'+esc(a.name)+'</div><div class="appCat">'+esc(a.category||'Aplikasi')+' · v'+esc(a.version||'—')+'</div>'+(a.verified?'<div class="verified">✓ Terverifikasi</div>':'')+'</div></div>'+
-'<p class="appDesc">'+esc(a.shortDescription||'')+'</p><div class="appMeta">'+stats+'</div>'+(p?'<a class="openBtn" href="'+esc(p)+'">Lihat aplikasi</a>':'<div class="openBtn" style="opacity:.5;cursor:not-allowed">APK belum tersedia</div>')+'</article>'}
+function card(a){var stats='📦 '+esc(a.size||'—');if(Number(a.ratingCount||0)>0)stats+=' · ⭐ '+esc(a.rating);if(Number(a.downloadCount||0)>0)stats+=' · 📥 '+esc(a.downloadCount);var p=safePage(a.page);return '<article class="appCard">'+ '<div class="appTop">'+icon(a,'appIcon')+'<div><div class="appName">'+esc(a.name)+'</div><div class="appCat">'+esc(a.category||'Aplikasi')+' · v'+esc(a.version||'—')+'</div>'+(a.verified?'<div class="verified">✓ Terverifikasi</div>':'')+'</div></div>'+'<p class="appDesc">'+esc(a.shortDescription||'')+'</p><div class="appMeta">'+stats+'</div>'+(p?'<a class="openBtn" href="'+esc(p)+'">Lihat aplikasi</a>':'<div class="openBtn" style="opacity:.5;cursor:not-allowed">APK belum tersedia</div>')+'</article>'}
 function renderHome(){document.getElementById('homeApps').innerHTML=allApps.length?allApps.map(card).join(''):'<div class="empty"><strong>Belum ada aplikasi</strong>Aplikasi yang ditambahkan akan muncul di sini.</div>';document.getElementById('latest').innerHTML=allApps.length?allApps.map(item).join(''):'<div class="empty">Belum ada APK.</div>';document.getElementById('appCount').textContent=allApps.length+' tersedia';renderGames()}function renderGames(){var games=allApps.filter(function(a){return (a.category||'')==='Games'});document.getElementById('gameList').innerHTML=games.length?games.map(item).join(''):'<div class="empty"><strong>🎮 Belum ada game</strong>Game yang ditambahkan dengan kategori Games akan muncul otomatis di sini.</div>'}
 function categories(){var order=[['Tools','🛠️'],['Games','🎮'],['Education','📚'],['Productivity','📈'],['Photography','📷'],['Music & Audio','🎵'],['Video & Media','🎬'],['Social','💬'],['Internet','🌐'],['Security','🔐'],['Customization','🎨'],['AI','🤖'],['Finance','💰'],['Utilities','🔧']];var map={};allApps.forEach(function(a){var c=String(a.category||'').trim();if(c)map[c]=(map[c]||0)+1});var html=order.map(function(x){var n=map[x[0]]||0;return '<button type="button" class="catBtn" data-category="'+esc(x[0])+'"><div class="catIcon">'+x[1]+'</div><b>'+esc(x[0])+'</b><span>'+n+' aplikasi</span></button>'}).join('');document.getElementById('categories').innerHTML=html||'<div class="empty">Belum ada kategori.</div>';document.querySelectorAll('#categories .catBtn').forEach(function(btn){btn.addEventListener('click',function(){openCategory(btn.dataset.category)})})}
 function openCategory(c){activeCategory=c;var list=allApps.filter(function(a){return String(a.category||'').trim()===c});var box=document.getElementById('categoryApps');if(!list.length){box.innerHTML='<div class="empty"><strong>'+esc(c)+'</strong>Belum ada APK di kategori ini.</div>';box.scrollIntoView({behavior:'smooth',block:'start'});return}if(list.length===1&&safePage(list[0].page)){window.location.href=list[0].page;return}box.innerHTML='<div class="sectionHead"><h2>'+esc(c)+'</h2><span>'+list.length+' aplikasi</span></div><div class="list">'+list.map(item).join('')+'</div>';box.scrollIntoView({behavior:'smooth',block:'start'})}
